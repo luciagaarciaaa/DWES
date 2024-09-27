@@ -6,9 +6,9 @@
  */
 
 // Cargar la fecha de nacimiento en variables
-$dia = 25;
-$mes = 9;
-$anio = 1995;
+$dia = 3;
+$mes = 12;
+$anio = 2003;
 
 // Crear un objeto de fecha con la fecha de nacimiento
 $fecha_nacimiento = new DateTime("$anio-$mes-$dia");
