@@ -23,8 +23,8 @@
             background-color: green; /* Día actual en verde */
             color: white;
         }
-        .festivo {
-            background-color: red; /* Días festivos en rojo */
+        .festivo, .domingo {
+            background-color: red; /* Días festivos y domingos en rojo */
             color: white;
         }
     </style>
@@ -33,14 +33,8 @@
 
 <?php
 // Variables de mes y año
-$mes = 9; // Septiembre
-$año = 2024;
-
-// Array de días festivos en Córdoba (personalizado)
-$festivos = [
-    '2024-09-08', // Día de la Virgen de la Asunción
-    '2024-09-24', // Día de la Revolución
-];
+$mes = 2; // Mes de septiembre
+$año = 2028;
 
 // Crear el objeto de calendario
 $primerDiaDelMes = mktime(0, 0, 0, $mes, 1, $año);
@@ -82,19 +76,32 @@ for ($dia = 1; $dia <= $diasDelMes; $dia++) {
         $claseDia = 'hoy'; // Día actual
     }
 
-    // Formato correcto para comparar con el array de festivos
-    $fechaActual = sprintf("%04d-%02d-%02d", $año, $mes, $dia);
-    
-    // Día festivo
-    if (in_array($fechaActual, $festivos)) {
+    // Verificación de días festivos en 2024
+    if (
+        ($dia == 1 && $mes == 1) ||  // Año Nuevo
+        ($dia == 6 && $mes == 1) ||  // Reyes
+        ($dia == 29 && $mes == 3) || // Viernes Santo
+        ($dia == 1 && $mes == 5) ||   // Día del Trabajador
+        ($dia == 15 && $mes == 8) ||  // Asunción de la Virgen
+        ($dia == 12 && $mes == 10) || // Día de la Hispanidad
+        ($dia == 1 && $mes == 11) ||  // Todos los Santos
+        ($dia == 6 && $mes == 12) ||  // Día de la Constitución
+        ($dia == 8 && $mes == 12) ||  // Inmaculada Concepción
+        ($dia == 25 && $mes == 12)    // Navidad
+    ) {
         $claseDia = 'festivo'; // Día festivo
+    }
+
+    // Comprobación de domingos
+    if (($primerDiaDeLaSemana + $dia - 1) % 7 == 0) {
+        $claseDia = 'domingo'; // Domingo
     }
 
     // Imprimir el día con la clase correspondiente
     echo "<td class='$claseDia'>$dia</td>";
 
     // Iniciar una nueva fila cada 7 días
-    if (($dia + $primerDiaDeLaSemana) % 7 == 0) {
+    if (($primerDiaDeLaSemana + $dia) % 7 == 0) {
         echo "</tr><tr>";
     }
 }

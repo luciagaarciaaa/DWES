@@ -1,47 +1,37 @@
+<?php
+/**@author lucia 
+ * @date 30/09/2024
+ * Mostrar paleta de colores. Utilizar una tabla que muestre el color y el valor
+ *hexadecimal que le corresponde. Cada celda será un enlace a una página que
+ *mostrará un fondo de pantalla con el color seleccionado. ¿Puedes hacerlo con los
+ *conocimientos que tienes? */
+// Recibir el parámetro de color desde la URL
+$color = isset($_GET['color']) ? $_GET['color'] : '#FFFFFF'; // Color blanco por defecto
 
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Color Seleccionado</title>
+    <title>Color: <?php echo $color; ?></title>
     <style>
         body {
+            background-color: <?php echo $color; ?>;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
             margin: 0;
-            height: 100vh; /* Asegura que ocupe toda la altura de la ventana */
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            color: white;
             font-family: Arial, sans-serif;
-            color: white; /* Color del texto */
-        }
-        .color-background {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center; /* Centra el texto */
+            font-size: 24px;
         }
     </style>
 </head>
 <body>
-
-<?php
-// Verifica si se recibió un color a través de la URL
-if (isset($_GET['color'])) {
-    // Escapa el color para prevenir inyecciones de HTML
-    $color = htmlspecialchars($_GET['color']);
-   
-
-    // Imprime el div con el color de fondo
-    echo "<div class='color-background' style='background-color: $color;'>
-            <h1>El color seleccionado es: $color</h1>
-          </div>";
-} else {
-    echo "<h1>No se ha seleccionado ningún color.</h1>";
-}
-?>
-
+    <div>
+        <h1>Color: <?php echo $color; ?></h1>
+    </div>
 </body>
 </html>

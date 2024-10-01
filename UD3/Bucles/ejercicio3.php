@@ -1,3 +1,31 @@
+<?php
+/**
+ * @author lucia 
+ * @date 30/09/2024
+ * Tablas de multiplicar del 1 al 10. Aplicar estilos en filas/columnas
+ */
+// Generar la cabecera de la tabla
+$header = "<tr><th>x</th>";
+for ($i = 1; $i <= 10; $i++) {
+    $header .= "<th>$i</th>";
+}
+$header .= "</tr>";
+
+// Generar las filas de la tabla de multiplicar
+$filas = "";
+for ($i = 1; $i <= 10; $i++) {
+    $filas .= "<tr>";
+    // Primera columna con el número base
+    $filas .= "<th>$i</th>";
+    // Generar las multiplicaciones
+    for ($j = 1; $j <= 10; $j++) {
+        $resultado = $i * $j;
+        $filas .= "<td>$resultado</td>";
+    }
+    $filas .= "</tr>";
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -39,29 +67,11 @@
     <h2>Tablas de multiplicar del 1 al 10</h2>
 
     <table>
-        <tr>
-            <th>x</th>
-            <?php
-    
-            for ($i = 1; $i <= 10; $i++) {
-                echo "<th>$i</th>";
-            }
-            ?>
-        </tr>
-
         <?php
-        // Generar filas y columnas para la tabla de multiplicar
-        for ($i = 1; $i <= 10; $i++) {
-            echo "<tr>";
-            // Primera columna con el número base
-            echo "<th>$i</th>";
-            // Generar las multiplicaciones
-            for ($j = 1; $j <= 10; $j++) {
-                $resultado = $i * $j;
-                echo "<td>$resultado</td>";
-            }
-            echo "</tr>";
-        }
+        // Mostrar la cabecera de la tabla
+        echo $header;
+        // Mostrar las filas de la tabla
+        echo $filas;
         ?>
     </table>
 
