@@ -1,3 +1,109 @@
+<?php
+/**
+ * @author lucia
+ * @date 30/09/2024
+ */
+ // Obtener la fecha actual
+ $hoy = date('j');      // Día actual
+ $hoyMes = date('n');   // Mes actual
+ $hoyAño = date('Y');   // Año actual
+ 
+ // Array de días festivos
+ $diasFestivos = [
+     '1-1' => ['nombre' => 'Año Nuevo', 'tipo' => 'nacional', 'color' => 'red'],
+     '6-1' => ['nombre' => 'Reyes', 'tipo' => 'nacional', 'color' => 'red'],
+     '29-3' => ['nombre' => 'Viernes Santo', 'tipo' => 'nacional', 'color' => 'red'],
+     '1-5' => ['nombre' => 'Día del Trabajador', 'tipo' => 'nacional', 'color' => 'red'],
+     '15-8' => ['nombre' => 'Asunción de la Virgen', 'tipo' => 'nacional', 'color' => 'red'],
+     '12-10' => ['nombre' => 'Día de la Hispanidad', 'tipo' => 'nacional', 'color' => 'red'],
+     '1-11' => ['nombre' => 'Todos los Santos', 'tipo' => 'nacional', 'color' => 'red'],
+     '6-12' => ['nombre' => 'Día de la Constitución', 'tipo' => 'nacional', 'color' => 'red'],
+     '8-12' => ['nombre' => 'Inmaculada Concepción', 'tipo' => 'nacional', 'color' => 'red'],
+     '25-12' => ['nombre' => 'Navidad', 'tipo' => 'nacional', 'color' => 'red'],
+     '28-2' => ['nombre' => 'Dia de Andalucía ', 'tipo' => 'comunidad', 'color' => 'blue'], // Ejemplo de festivo de comunidad
+     '8-9' => ['nombre' => 'Día de la Virgen de la Sierra', 'tipo' => 'local', 'color' => 'orange'], // Fiesta local
+    '24-10' => ['nombre' => 'Fiesta Local de Córdoba', 'tipo' => 'local', 'color' => 'orange'], // Fiesta local 
+ ];
+ 
+ // Crear el objeto de calendario
+ $primerDiaDelMes = mktime(0, 0, 0, $hoyMes, 1, $hoyAño);
+ $diasDelMes = date('t', $primerDiaDelMes);
+ $nombreMes = date('F', $primerDiaDelMes);
+ $primerDiaDeLaSemana = date('w', $primerDiaDelMes);
+ 
+ // Crear el calendario
+ echo "<h1>Calendario de $nombreMes $hoyAño</h1>";
+ echo "<table border='1'>";
+ echo "<tr>
+         <th>Domingo</th>
+         <th>Lunes</th>
+         <th>Martes</th>
+         <th>Miércoles</th>
+         <th>Jueves</th>
+         <th>Viernes</th>
+         <th>Sábado</th>
+       </tr>";
+ echo "<tr>";
+ 
+ // Espacios en blanco hasta el primer día del mes
+ for ($i = 0; $i < $primerDiaDeLaSemana; $i++) {
+     echo "<td></td>";
+ }
+ 
+ // Mostrar los días del mes
+ for ($dia = 1; $dia <= $diasDelMes; $dia++) {
+     // Verificar si el día es hoy
+     $claseDia = '';
+     $colorFestivo = '';
+ 
+     // Día actual
+     if ($dia == $hoy && $hoyMes == date('n') && $hoyAño == date('Y')) {
+         $claseDia = 'hoy'; // Día actual
+     }
+ 
+     // Comprobar si el día es festivo
+     $fechaActual = "$dia-$hoyMes"; // Formato dia-mes
+     $nombreFestivo = '';
+ 
+     if (array_key_exists($fechaActual, $diasFestivos)) {
+         $claseDia = 'festivo'; // Día festivo
+         $colorFestivo = $diasFestivos[$fechaActual]['color']; // Color del festivo
+         $nombreFestivo = $diasFestivos[$fechaActual]['nombre']; // Nombre del festivo
+     }
+ 
+     // Comprobación de domingos
+     if (($primerDiaDeLaSemana + $dia - 1) % 7 == 0) {
+         $claseDia = 'domingo'; // Domingo
+     }
+ 
+     // Imprimir el día con la clase correspondiente
+     echo "<td class='$claseDia' style='background-color: $colorFestivo;'>";
+ 
+     // Mostrar el nombre del festivo si corresponde
+     if ($nombreFestivo) {
+         echo "$nombreFestivo"; // Mostrar el nombre del festivo
+     } else {
+         echo $dia; // Mostrar el número del día
+     }
+ 
+     echo "</td>";
+ 
+     // Iniciar una nueva fila cada 7 días
+     if (($primerDiaDeLaSemana + $dia) % 7 == 0) {
+         echo "</tr><tr>";
+     }
+ }
+ 
+ // Completar el resto de la tabla
+ while (($dia + $primerDiaDeLaSemana) <= 42) {
+     echo "<td></td>";
+     $dia++;
+ }
+ 
+ echo "</tr>";
+ echo "</table>";
+ ?>
+ 
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -30,91 +136,6 @@
     </style>
 </head>
 <body>
-
-<?php
-// Variables de mes y año
-$mes = 2; // Mes de septiembre
-$año = 2028;
-
-// Crear el objeto de calendario
-$primerDiaDelMes = mktime(0, 0, 0, $mes, 1, $año);
-$diasDelMes = date('t', $primerDiaDelMes);
-$nombreMes = date('F', $primerDiaDelMes);
-$primerDiaDeLaSemana = date('w', $primerDiaDelMes);
-
-// Crear el calendario
-echo "<h1>Calendario de $nombreMes $año</h1>";
-echo "<table>";
-echo "<tr>
-        <th>Domingo</th>
-        <th>Lunes</th>
-        <th>Martes</th>
-        <th>Miércoles</th>
-        <th>Jueves</th>
-        <th>Viernes</th>
-        <th>Sábado</th>
-      </tr>";
-echo "<tr>";
-
-// Espacios en blanco hasta el primer día del mes
-for ($i = 0; $i < $primerDiaDeLaSemana; $i++) {
-    echo "<td></td>";
-}
-
-// Mostrar los días del mes
-for ($dia = 1; $dia <= $diasDelMes; $dia++) {
-    // Verificar si el día es hoy
-    $hoy = date('j');
-    $hoyMes = date('n');
-    $hoyAño = date('Y');
-    
-    // Variable para la clase CSS
-    $claseDia = '';
-
-    // Día actual
-    if ($dia == $hoy && $hoyMes == $mes && $hoyAño == $año) {
-        $claseDia = 'hoy'; // Día actual
-    }
-
-    // Verificación de días festivos en 2024
-    if (
-        ($dia == 1 && $mes == 1) ||  // Año Nuevo
-        ($dia == 6 && $mes == 1) ||  // Reyes
-        ($dia == 29 && $mes == 3) || // Viernes Santo
-        ($dia == 1 && $mes == 5) ||   // Día del Trabajador
-        ($dia == 15 && $mes == 8) ||  // Asunción de la Virgen
-        ($dia == 12 && $mes == 10) || // Día de la Hispanidad
-        ($dia == 1 && $mes == 11) ||  // Todos los Santos
-        ($dia == 6 && $mes == 12) ||  // Día de la Constitución
-        ($dia == 8 && $mes == 12) ||  // Inmaculada Concepción
-        ($dia == 25 && $mes == 12)    // Navidad
-    ) {
-        $claseDia = 'festivo'; // Día festivo
-    }
-
-    // Comprobación de domingos
-    if (($primerDiaDeLaSemana + $dia - 1) % 7 == 0) {
-        $claseDia = 'domingo'; // Domingo
-    }
-
-    // Imprimir el día con la clase correspondiente
-    echo "<td class='$claseDia'>$dia</td>";
-
-    // Iniciar una nueva fila cada 7 días
-    if (($primerDiaDeLaSemana + $dia) % 7 == 0) {
-        echo "</tr><tr>";
-    }
-}
-
-// Completar el resto de la tabla
-while (($dia + $primerDiaDeLaSemana) <= 42) {
-    echo "<td></td>";
-    $dia++;
-}
-
-echo "</tr>";
-echo "</table>";
-?>
 
 </body>
 </html>
