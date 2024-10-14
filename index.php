@@ -1,7 +1,5 @@
 <?php 
 include ('C:\xampp\htdocs\DWES\config\config.php');
-
-
 ?>
 
 <!DOCTYPE html>

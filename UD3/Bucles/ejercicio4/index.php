@@ -1,11 +1,8 @@
 <?php
-$base_url = '/UD3/Condiciones/';
+$base_url = '/UD3/Bucles/ejercicio4/';
 
 $ejercicios = [
-    'ejercicio1.php'=> 'ejercicio1',
-    'ejercicio2.php'=> 'ejercicio2',
-    'ejercicio3.php'=> 'ejercicio3',
-
+    'ejercicio4.php'=> 'ejercicio 4'
 ];
 ?>
 <!DOCTYPE html>

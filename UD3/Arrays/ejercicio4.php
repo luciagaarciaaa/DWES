@@ -1,4 +1,8 @@
 <?php
+/**
+ * @author lucia
+ * @date 02/10/2024
+ */
 // Datos de los platos
 $platos = [
     'primeros' => [

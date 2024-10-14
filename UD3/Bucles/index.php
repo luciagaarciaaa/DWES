@@ -1,11 +1,12 @@
 <?php
-$base_url = '/UD3/Condiciones/';
+$base_url ='/UD3/Bucles/';
 
+// Definir el array con los archivos y la carpeta
 $ejercicios = [
-    'ejercicio1.php'=> 'ejercicio1',
-    'ejercicio2.php'=> 'ejercicio2',
-    'ejercicio3.php'=> 'ejercicio3',
-
+    'ejercicio1.php' => 'Ejercicio 1',
+    'ejercicio2.php' => 'Ejercicio 2',
+    'ejercicio3.php' => 'Ejercicio 3',
+    'ejercicio4/'    => 'Ejercicio 4', // Apuntamos a la carpeta 'ejercicio4/'
 ];
 ?>
 <!DOCTYPE html>
@@ -13,7 +14,7 @@ $ejercicios = [
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ejercicios de Condicionales</title>
+    <title>Ejercicios de Bucles</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -45,7 +46,7 @@ $ejercicios = [
     </style>
 </head>
 <body>
-    <h1>Ejercicios de Condicionales</h1>
+    <h1>Ejercicios de Bucles</h1>
     <ul class="ejercicios">
         <?php foreach ($ejercicios as $file => $name): ?>
             <li class="ejercicio">
