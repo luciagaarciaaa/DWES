@@ -1,0 +1,22 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+th {
+    background-color: #f2f2f2;
+}
+td {
+    width: 14.28%;
+    height: 80px; /* altura de cada celda */
+    border: 1px solid #ccc;
+    position: relative;
+}
+.hoy {
+    background-color: green; /* Día actual en verde */
+    color: white;
+}
+.festivo, .domingo {
+    background-color: red; /* Días festivos y domingos en rojo */
+    color: white;
+}

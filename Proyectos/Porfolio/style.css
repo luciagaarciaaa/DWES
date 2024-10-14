@@ -1,0 +1,141 @@
+ /* Estilos generales */
+ body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+}
+nav {
+    position: relative;
+    z-index: 1; /* Asegura que el menú esté por encima de la imagen */
+    text-align: center;
+    padding-top: 10px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 10px;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/*header nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+header nav ul li {
+    margin: 0 15px;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+*/
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+section {
+    margin: 40px 0;
+}
+
+h2 {
+    color: #333;
+    text-align: center;
+}
+
+/* Sección "Sobre mí" */
+#about {
+    display: flex;
+    flex-direction: column; /* Coloca los elementos en una columna */
+    justify-content: center; /* Centra los elementos verticalmente */
+    align-items: center;     /* Centra los elementos horizontalmente */
+    text-align: center;      /* Centra el texto */
+}
+#about p {
+    text-align: center;
+    font-size: 1.2em;
+}
+#about ul {
+    list-style-type: none; /* Elimina los puntos de la lista */
+    padding: 0;            /* Elimina el padding predeterminado del <ul> */
+}
+#about li {
+    margin: 5px 0;         /* Espaciado entre los elementos de la lista */
+}
+
+#about img {
+    width: 150px; /* Ajusta el tamaño de la imagen si lo deseas */
+    border-radius: 20%; /* Opcional: si quieres que la imagen sea redonda */
+    margin-top: 20px; /* Espacio entre el texto y la imagen */
+}
+
+/* Sección de habilidades */
+#skills ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+}
+
+#skills ul li {
+    color: #f4f4f4;
+    margin: 0 10px;
+    background-color: #58d68d;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Sección de proyectos */
+#projects .project {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#projects .project img {
+    width: 150px;
+    height: auto;
+    margin-right: 20px;
+    border-radius: 5px;
+}
+
+#projects .project h3 {
+    margin: 0;
+    color: #333;
+}
+
+#projects .project p {
+    margin: 5px 0 0;
+}
+
+/* Pie de página */
+footer {
+    text-align: center;
+    padding: 10px 0;
+    background-color: #333;
+    color: white;
+}
