@@ -1,7 +1,7 @@
 <?php 
 /**
  * @author lucia 
- * @date 01/10/2024
+ * @date 11/10/2024
  * Formulario para crear un currículum que incluya: Campos de texto, grupo de
 *botones de opción, casilla de verificación, lista de selección única, lista de
 *selección múltiple, botón de validación, botón de imagen, botón de reset, etc.
