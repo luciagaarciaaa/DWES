@@ -1,11 +1,11 @@
 <?php
-$base_url = '/UD3/Arrays/';
+$base_url ='/Proyectos';
 
 // Definir el array con los archivos y la carpeta
 $ejercicios = [
-    'ejercicio1.php' => 'Ejercicio 1',
-    'ejercicio3.php' => 'Ejercicio 3',
-    'ejercicio4.php' => 'Ejercicio 4', // Apuntamos a la carpeta 'ejercicio4/'
+    '/Calendario/calendario.php' => 'Calendario',
+    '/Porfolio/index.php' => 'Porfolio',
+   
 ];
 ?>
 <!DOCTYPE html>
@@ -13,8 +13,7 @@ $ejercicios = [
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ejercicios de Arrays</title>
-    <link rel="stylesheet" href="style.css"> <!-- Enlaza tu CSS si lo tienes -->
+    <title>Proyectos</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -46,7 +45,7 @@ $ejercicios = [
     </style>
 </head>
 <body>
-    <h1>Ejercicios de Arrays</h1>
+    <h1>Proyectos</h1>
     <ul class="ejercicios">
         <?php foreach ($ejercicios as $file => $name): ?>
             <li class="ejercicio">

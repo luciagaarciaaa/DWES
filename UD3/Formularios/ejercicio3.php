@@ -1,12 +1,17 @@
 <?php 
 /**
  * @author lucia 
- * @date 11/10/2024
+ * @date 01/10/2024
  * Formulario para crear un currículum que incluya: Campos de texto, grupo de
-*botones de opción, casilla de verificación, lista de selección única, lista de
-*selección múltiple, botón de validación, botón de imagen, botón de reset, etc.
+ * botones de opción, casilla de verificación, lista de selección única, lista de
+ * selección múltiple, botón de validación, botón de imagen, botón de reset, etc.
  */
 
+// Variable para controlar si se han enviado datos
+$datosEnviados = false;
+$mensaje = '';
+
+// Verificar si se ha enviado el formulario (usando el método POST)
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Recibir datos del formulario
     $nombre = htmlspecialchars($_POST['nombre']);
@@ -16,17 +21,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $habilidades = isset($_POST['habilidades']) ? $_POST['habilidades'] : [];
     $educacion = htmlspecialchars($_POST['educacion']);
     $idiomas = isset($_POST['idiomas']) ? $_POST['idiomas'] : [];
+    
+    // Comprobar si se ha subido un archivo
+    if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] == 0) {
+        $nombreArchivo = $_FILES['imagen']['name'];
+        $tipoArchivo = $_FILES['imagen']['type'];
+        $tamanoArchivo = $_FILES['imagen']['size'];
+        $archivoTemporal = $_FILES['imagen']['tmp_name'];
 
+        // Definir la carpeta donde se guardará el archivo
+        $directorioDestino = "uploads/";
 
-    // Mostrar los datos enviados
-    echo "<h2>Datos enviados</h2>";
-    echo "Nombre: $nombre<br>";
-    echo "Correo: $correo<br>";
-    echo "Teléfono: $telefono<br>";
-    echo "Género: $genero<br>";
-    echo "Habilidades: " . implode(", ", $habilidades) . "<br>";
-    echo "Educación: $educacion<br>";
-    echo "Idiomas: " . implode(", ", $idiomas) . "<br><br>";
+        // Verificar que el archivo es una imagen
+        $tiposPermitidos = ['image/jpeg', 'image/png', 'image/gif'];
+        if (in_array($tipoArchivo, $tiposPermitidos)) {
+            // Mover el archivo desde el directorio temporal al directorio de destino
+            if (move_uploaded_file($archivoTemporal, $directorioDestino . $nombreArchivo)) {
+                $mensaje = "La imagen se ha subido correctamente: " . $nombreArchivo;
+            } else {
+                $mensaje = "Hubo un error al subir la imagen.";
+            }
+        } else {
+            $mensaje = "Solo se permiten imágenes en formato JPG, PNG o GIF.";
+        }
+    } else {
+        $mensaje = "No se ha subido ninguna imagen o hubo un error.";
+    }
+
+    // Cambiar el estado a verdadero para ocultar el formulario
+    $datosEnviados = true;
 }
 ?>
 
@@ -36,13 +59,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario de Currículum</title>
+    <style>
+        /* Estilo para ocultar el formulario cuando los datos han sido enviados */
+        <?php if ($datosEnviados): ?>
+            form {
+                display: none; /* Oculta el formulario */
+            }
+        <?php endif; ?>
+    </style>
 </head>
 <body>
 
 <h2>Formulario para Crear Currículum</h2>
 
-<form method="post" action="">
-
+<!-- Formulario para subir imagen y otros datos -->
+<form method="post" action="" enctype="multipart/form-data">
     <!-- Campos de Texto -->
     <label for="nombre">Nombre Completo:</label><br>
     <input type="text" id="nombre" name="nombre" required><br><br>
@@ -91,7 +122,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <label for="imagen">Seleccione una imagen:</label><br>
     <input type="file" name="imagen" id="imagen" accept="image/*"><br><br>
     <button type="submit">Enviar</button>
-    <input type="reset" value="Resetear"><br><br>  
+    <input type="reset" value="Resetear"><br><br>
 </form>
+
+<?php if ($datosEnviados): ?>
+    <!-- Mostrar los datos enviados -->
+    <h2>Datos enviados</h2>
+    <p>Nombre: <?php echo $nombre; ?></p>
+    <p>Correo: <?php echo $correo; ?></p>
+    <p>Teléfono: <?php echo $telefono; ?></p>
+    <p>Género: <?php echo $genero; ?></p>
+    <p>Habilidades: <?php echo implode(", ", $habilidades); ?></p>
+    <p>Educación: <?php echo $educacion; ?></p>
+    <p>Idiomas: <?php echo implode(", ", $idiomas); ?></p>
+    <p><?php echo $mensaje; ?></p>
+<?php endif; ?>
+
 </body>
 </html>
