@@ -27,8 +27,12 @@ if (isset($_POST["enviar"])) {
     );
     
 }
+
 $data = $_SESSION["contactos"];
+
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
