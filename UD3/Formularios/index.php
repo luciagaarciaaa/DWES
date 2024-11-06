@@ -4,7 +4,7 @@ $base_url ='/UD3/Formularios/';
 // Definir el array con los archivos y la carpeta
 $ejercicios = [
     'ejercicio3.php' => 'Ejercicio 3',
-    'ejercicio4.php' => 'Ejercicio 4',
+    '/ejercicio4.php/ejercicio4.php' => 'Ejercicio 4',
     'ejercicio5.php' => 'Ejercicio 5',
 ];
 ?>
