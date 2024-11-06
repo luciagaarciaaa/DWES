@@ -23,12 +23,8 @@ $bandera = '';
 // Comprobar si el formulario fue enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $selectedCountry = $_POST['pais'];
-
-    // Verificar si el país seleccionado existe en el array
-    if (array_key_exists($selectedCountry, $paises)) {
-        $capital = $paises[$selectedCountry]['capital'];
-        $bandera = $paises[$selectedCountry]['bandera'];
-    }
+    $capital = $paises[$selectedCountry]['capital'];
+    $bandera = $paises[$selectedCountry]['bandera'];
 }
 ?>
 
