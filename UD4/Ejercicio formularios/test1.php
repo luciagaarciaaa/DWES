@@ -3,7 +3,7 @@
  * Test 1 para comprobar el manejo de fichero de texto
  * @author lucia <email@email.com>
  */
-include "./conf/config.php";
+include "./config1.php";
 // declaracion de variables
 $aUsuarios=array();
 $desglose=[];//array
